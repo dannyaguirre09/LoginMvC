@@ -1,0 +1,28 @@
+﻿@model  LibraryTemplate.Models.Book
+
+@{
+	Layout = null;
+}
+
+
+@using (Html.BeginForm("AddOrEdit", "Book", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+	@Html.HiddenFor(model => model.IdBook)
+	<div class="form-group">
+		@Html.LabelFor(model => model.NameBook, new { @class = "control-label" })
+		@Html.EditorFor(model => model.NameBook, new { HtmlAttributes = new { @class = "form-control" } })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(model => model.DescriptionBook, new { @class = "control-label" })
+		@Html.TextAreaFor(model => model.DescriptionBook, new { @class = "form-control" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(model => model.IdCategory, new { @class = "control-label" })
+		@Html.DropDownListFor(model => Model.IdCategory, new SelectList((IEnumerable<SelectListItem>)ViewBag.Categories, "Value", "Text", Model.IdCategory), new { @class = "form-control" })
+	</div>
+
+	<div class="form-group">
+		<input type="submit" value="Submit" class="btn btn-success" />
+		<input type="reset" value="reset" class="btn btn-warning" />
+	</div>
+}
